@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import ReactPlayer from 'react-player';
-import styles from './Home.module.css'; // Importa o CSS Module
 
 function Home() {
     const [videoFile, setVideoFile] = useState(null);
@@ -33,20 +32,23 @@ function Home() {
     };
 
     return (
-        <div className={styles.homeContainer}>
-            <h1>Olha isso Kau, eu oficialmente conquistei a internet, a concorrência que se prepare…</h1>
+        <div className="text-center p-6">
+            <h1 className="text-2xl font-bold mb-6">
+                Olha isso Kau, eu oficialmente conquistei a internet, a concorrência que se prepare…
+            </h1>
 
-            <div className={styles.uploadSection}>
-                <label>Suba seu próprio vídeo:</label>
-                <p className={styles.instruction}>
+            <div className="mb-6">
+                <label className="block mb-2 text-lg font-semibold">Suba seu próprio vídeo:</label>
+                <p className="text-sm text-gray-600 mb-2">
                     Para melhor encaixe, use vídeos com proporção de 1:2 (exemplo: 300x600, 480x960, ou 600x1200 pixels).
                 </p>
-                <input type="file" accept="video/mp4" onChange={handleVideoUpload} />
+                <input type="file" accept="video/mp4" onChange={handleVideoUpload} className="block mx-auto" />
             </div>
 
             {videoFile && (
-                <div className={styles.playerAndDetails}>
-                    <div className={styles.videoPlayerContainer}>
+                <div className="flex flex-col md:flex-row items-center justify-center mt-8 space-y-6 md:space-y-0 md:space-x-8">
+                    {/* Contêiner do player de vídeo com estilo de celular */}
+                    <div className="relative w-72 h-[600px] rounded-lg overflow-hidden shadow-lg bg-black">
                         <ReactPlayer
                             url={videoFile}
                             controls
@@ -56,9 +58,10 @@ function Home() {
                         />
                     </div>
 
+                    {/* Detalhes do vídeo ao lado do player */}
                     {videoDetails && (
-                        <div className={styles.videoDetails}>
-                            <h3>Detalhes do Vídeo:</h3>
+                        <div className="text-left max-w-xs">
+                            <h3 className="text-lg font-semibold mb-4">Detalhes do Vídeo:</h3>
                             <p><strong>Nome do arquivo:</strong> {videoDetails.filename}</p>
                             <p><strong>Formato:</strong> {videoDetails.video_format}</p>
                             <p><strong>Resolução:</strong> {videoDetails.resolution}</p>
